@@ -1,1 +1,3 @@
 # paranhos-assistant
+
+Assistant project
