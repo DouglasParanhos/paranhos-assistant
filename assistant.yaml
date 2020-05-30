@@ -1,0 +1,11 @@
+#configuration file
+existent-assistants:
+    - jade
+    - jura
+
+assistant:
+    name: jade
+
+greeting:
+    jade: Olá, tudo bem?
+    jura: Acordar a essa hora? Não é brinquedo não!

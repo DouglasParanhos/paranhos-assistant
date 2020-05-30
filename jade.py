@@ -1,29 +1,14 @@
 import speech_recognition as sr
+import consult_action as actions
 import time
 import yaml
-import webbrowser as browser
-import wikipedia
-
-from gtts import gTTS
-from subprocess import call
 
 recognizer = sr.Recognizer()
 microphone = sr.Microphone()
-wikipedia.set_lang("pt")
 
 with open("assistant.yaml", "r") as ymlfile:
     cfg = yaml.load(ymlfile)
 
-def checkAction(audio):
-    print(audio)
-    if "browser" in audio:
-        querySearch = audio.replace("browser", "").replace(" ", "+")
-        browser.open_new(f'https://www.google.com/search?q={querySearch}')
-
-    if "o que é" in audio or "quem é" in audio:
-        querySearch = audio.replace("o que é", "").replace("quem é", "").\
-                        replace("?","").strip().title()
-        print(wikipedia.summary(querySearch, sentences=2))
 
 def listen():
 
@@ -35,7 +20,7 @@ def listen():
                 transcription = transcription.lower()
                 
                 if cfg["assistant"]["name"].lower() in transcription:
-                    checkAction(transcription)
+                    actions.checkAction(transcription)
 
 
             except sr.UnknownValueError:
@@ -43,11 +28,7 @@ def listen():
             except sr.RequestError as e:
                 print("Could not request results from Google Speech Recognition service; {0}".format(e))
 
-def create_audio(mensagem):
-    tts = gTTS(mensagem, lang='pt-br')
-    filePath = f'audios/{cfg["assistant"]["name"].lower()}/mensagem.mp3'
-    tts.save(filePath)
-    print(cfg["assistant"]["name"], ':', mensagem)
-    call(['mpg123', '-q', filePath])
+def init():
+    cfg["greeting"][f'{cfg["assistant"]["name"]}']
 
-checkAction("o que é elton john?")
+init()
