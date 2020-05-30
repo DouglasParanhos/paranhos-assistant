@@ -10,7 +10,7 @@ assistantName = cfg["assistant"]["name"]
 
 def create_audio(mensagem):
     tts = gTTS(mensagem, lang='pt-br')
-    filePath = f'audios/{.lower()}/mensagem.mp3'
+    filePath = f'audios/{assistantName.lower()}/mensagem.mp3'
     tts.save(filePath)
     print(assistantName, ':', mensagem)
     call(['mpg123', '-q', filePath])
