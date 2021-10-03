@@ -14,7 +14,7 @@ def checkAction(audio):
     elif "pesquisa na wiki" in audio:
         querySearch = audio.replace("pesquisa na wiki ","").strip().title()
         try:
-            print(querySearch)
+            print("Mostrando o resultado da busca por: " + querySearch)
             print(wikipedia.summary(querySearch, sentences=2))
         except wikipedia.exceptions.PageError:
             print(f'Não achei {audio} na wikipedia')
